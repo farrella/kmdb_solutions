@@ -58,7 +58,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_5
-    # What is the most recent movie on the list that the first actor appeared in?
+    # What is the most recent movie on the list that the second actor appeared in?
 
     # Your Ruby goes here.
     # You'll probably have to use both ActiveRecord query methods as well as some plain old Ruby logic.
@@ -71,15 +71,16 @@ class QuestionsController < ApplicationController
       the_actors_movies.push(the_role.movie)
     end
 
-    most_recent_movie = { :year => 0, :title => "" }
+    most_recent_movie = Movie.new
+    most_recent_movie.year = "0"
 
     the_actors_movies.each do |the_movie|
-      if the_movie.year.to_i > most_recent_movie[:year]
-        most_recent_movie = { :year => the_movie.year.to_i, :title => the_movie.title }
+      if the_movie.year > most_recent_movie.year
+        most_recent_movie = the_movie
       end
     end
 
-    @most_recent_movie_for_first_actor = most_recent_movie[:title]
+    @most_recent_movie_for_second_actor = most_recent_movie
 
     # Alternatively,
 
